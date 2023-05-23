@@ -1,5 +1,5 @@
 const express = require('express');
-const router = require('./Route/routes');
+const router = require('./routes/routes');
 const cors = require("cors");
 const app = express();
 const port = 5000;
@@ -12,5 +12,5 @@ app.get('/', (req, res) => {
 app.use("/api",router);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Example app listening on https://localhost:${port}`);
 })

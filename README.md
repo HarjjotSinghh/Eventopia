@@ -7,6 +7,7 @@ Discover an exceptional website dedicated to keeping you informed about the vibr
 - ExpressJS 
 - ReactJS
 - Node.js
+- Tailwind CSS
 
 ## Team Eventopia
 - [Ansh Rajput](https://github.com/Ansh-Rajput)
