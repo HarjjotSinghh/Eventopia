@@ -4,7 +4,7 @@ require('dotenv').config();
 const router = require('./routes/event');
 const mongoose = require('mongoose');
 const cors = require("cors");
-const eventModal = require('./Modals/eventModal');
+const eventModal = require('./Modals/example');
 const app = express();
 const port = 5000;
 const Event = require('./Modals/eventModal');
