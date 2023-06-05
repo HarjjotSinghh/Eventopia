@@ -7,7 +7,7 @@ const EventSchema = new mongoose.Schema({
             required: true 
         },
         date:{
-            type:String,
+            type:Date,
             required:true
         },
         timing:{
@@ -25,6 +25,16 @@ const EventSchema = new mongoose.Schema({
         poster:{
             type:String,
             required:true
+        },
+        fees: {
+            type: Number,
+            required: true,
+            default: 0
+        },
+        completed: {
+            type: Boolean,
+            required:false,
+            default: false,
         }
     },
     organizer:{
