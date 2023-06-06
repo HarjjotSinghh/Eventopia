@@ -1,14 +1,15 @@
 const express = require('express');
 // const router = express.Router();
 require('dotenv').config();
-const router = require('./routes/event');
+const eventRouter = require('./routes/event');
+const userRouter = require('./routes/user');
 const mongoose = require('mongoose');
 const cors = require("cors");
 // const eventModal = require('./Modals/example');
 const app = express();
 const port = 5000;
 const Event = require('./Modals/eventModal');
-const next = require('concurrent/lib/next');
+// const next = require('concurrent/lib/next');
 
 //dummy data of event
 // const data = { 
@@ -29,7 +30,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/events",router);
+app.use("/api/events",eventRouter);
+app.use("/api/user",userRouter);
 
 
 // router.get('/events', async (req, res) => {
