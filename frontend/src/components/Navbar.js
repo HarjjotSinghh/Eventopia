@@ -1,10 +1,14 @@
 import Logo from "./Logo";
 import NavbarHeading from "./NavbarHeading";
 import { Link } from "react-router-dom";
+// import { HamburgerButton } from "./HamburgerButton";
 
 const Navbar = () => {
     return (
-        <header className="navbar flex items-center justify-between fixed z-[99] top-0 w-screen py-4 bg-transparent backdrop-blur-xl backdrop-brightness-[0.98]">
+        <div>
+            {/* <HamburgerButton /> */}
+
+            <header className="navbar flex items-center justify-between fixed z-[99] top-0 w-screen py-4 bg-transparent backdrop-blur-lg backdrop-brightness-[0.99] shadow-lg shadow-[#f5f5f5]">
             <Link to="/">
                 <Logo/>
             </Link>
@@ -23,6 +27,9 @@ const Navbar = () => {
                 </Link>
             </div>
         </header>
+        </div>
+        
+
     )
 };
 export default Navbar;
