@@ -18,11 +18,11 @@ body("management").notEmpty()
     if (result.isEmpty()) {
       const data = await eventModal({eventDetails:{
         title:req.body.eventDetails.title,
-    date:req.body.eventDetails.date,
-    timing:req.body.eventDetails.timing,
-    venue:req.body.eventDetails.venue,
-    description:req.body.eventDetails.description,
-    poster:req.body.eventDetails.poster
+        date:req.body.eventDetails.date,
+        timing:req.body.eventDetails.timing,
+        venue:req.body.eventDetails.venue,
+        description:req.body.eventDetails.description,
+        poster:req.body.eventDetails.poster
     },organizer:{
         society:req.body.organizer.society,
         socialmedia:req.body.organizer.socialmedia,
@@ -56,11 +56,11 @@ router.put("/updateevent/:id",[//This route will Update Events.
     if (result.isEmpty()) {
         const data = await eventModal.findByIdAndUpdate(req.params.id,{eventDetails:{
             title:req.body.eventDetails.title,
-        date:req.body.eventDetails.date,
-        timing:req.body.eventDetails.timing,
-        venue:req.body.eventDetails.venue,
-        description:req.body.eventDetails.description,
-        poster:req.body.eventDetails.poster
+            date:req.body.eventDetails.date,
+            timing:req.body.eventDetails.timing,
+            venue:req.body.eventDetails.venue,
+            description:req.body.eventDetails.description,
+            poster:req.body.eventDetails.poster
         },organizer:{
             society:req.body.organizer.society,
             socialmedia:req.body.organizer.socialmedia,
