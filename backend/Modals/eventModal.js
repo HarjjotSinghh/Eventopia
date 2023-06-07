@@ -60,6 +60,12 @@ const EventSchema = new mongoose.Schema({
             type:Number,
             required:true
         }
+    },
+    uploadedBy: {
+        username:{
+            type: String,
+            required:false,
+        }
     }
 },{ timestamps: true });
 

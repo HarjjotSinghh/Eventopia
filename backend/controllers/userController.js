@@ -6,10 +6,11 @@ require('dotenv').config();
 const createUser = async (req, res) => {
     // URL: http://localhost:5000/api/user/createUser
 
-    //sampleData: {
+//     sampleData: {
 //   "userName":"test3",
 //   "email":"test3@gmail.com",
-//   "password":"test1234"
+//   "password":"test1234",
+//   "admin": "false"
 // }
     try {
         const findEmail = await userModal.find({email:req.body.email});
