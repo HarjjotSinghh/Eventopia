@@ -6,6 +6,10 @@ import { MainPageVector } from './components/MainPageVector';
 import { Pragraph } from './components/Paragraph';
 import { Button } from "./components/Button"
 
+
+// def app():
+// function app() { ... }
+
 function App() {
   return (
     <>
