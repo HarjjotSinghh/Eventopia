@@ -15,8 +15,16 @@ const Login = () => {
 		e.preventDefault();
 		try {
 			const url = "http://localhost:5000/api/user/login";
-			const {data:res} = await axios.post(url, data);
-			localStorage.setItem("token", res.data.token);
+			const res = await axios.post(url, data);
+            const newToken = res.data["token"];
+            const existingToken = localStorage.getItem("token");
+            if (existingToken) {
+                localStorage.removeItem("token");
+            }
+
+            localStorage.setItem("token", newToken);
+			// localStorage.setItem("token", res.data["token"]);
+            // console.log(res.data, res.data["token"])
 			window.location = "/";
 		} catch (error) {
 			if (
