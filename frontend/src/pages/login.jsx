@@ -20,9 +20,15 @@ const Login = () => {
             const existingToken = localStorage.getItem("token");
             if (existingToken) {
                 localStorage.removeItem("token");
+				localStorage.removeItem("email");
+            	localStorage.removeItem("userName");
+            	localStorage.removeItem("name");
             }
 
             localStorage.setItem("token", newToken);
+            localStorage.setItem("email", res.data["email"]);
+            localStorage.setItem("userName", res.data["userName"]);
+            localStorage.setItem("name", res.data["name"]);
 			// localStorage.setItem("token", res.data["token"]);
             // console.log(res.data, res.data["token"])
 			window.location = "/";
@@ -42,7 +48,6 @@ const Login = () => {
 			<div className="login_form_container">
 				<div className="left">
 					<form className="form_container" onSubmit={handleSubmit}>
-						<h1>Login to Your Account</h1>
 						<input
 							type="email"
 							placeholder="Email"
@@ -61,8 +66,8 @@ const Login = () => {
 							required
 							className="input"
 						/>
-						{error && <div className={styles.error_msg}>{error}</div>}
-						<button type="submit" className={styles.green_btn}>
+						{error && <div className="error_msg">{error}</div>}
+						<button type="submit" className="green_btn">
 							Log In
 						</button>
 					</form>

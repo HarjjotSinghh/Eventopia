@@ -58,7 +58,7 @@ const signUpUser = async (req, res) => {
             if(result){
                 const token = jwt.sign({ id: findEmail._id }, `${process.env.PRIVITE_KEY}`, {expiresIn: "7d"});
                 // const token2 = User.generateAuthToken();
-                res.status(201).json({ message: 'User login successfull', token:token});
+                res.status(201).json({ message: 'User login successfull', token:token, email:findEmail[0].email, userName:findEmail[0].userName, name:findEmail[0].name});
             }
             else{
                 res.status(404).json({ message: 'Incorrect Email or Password'});

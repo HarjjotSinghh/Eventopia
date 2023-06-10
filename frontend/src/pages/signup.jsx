@@ -43,7 +43,7 @@ const Signup = () => {
 		<div className="signup_container">
 			<div className="signup_form_container">
 				<div className="right">
-					<h1 style={{padding: "20px" }}>Welcome Back</h1>
+					<h1 style={{padding: "20px" }}>Existing User ?</h1>
 					<Link to="/login">
 						<button type="button" className="white_btn">
 							Sing in
@@ -52,7 +52,7 @@ const Signup = () => {
 				</div>
 				<div className="left">
 					<form className="form_container" onSubmit={handleSubmit}>
-						<h1>Create Account</h1>
+						
 						<input
 							type="text"
 							placeholder="Name"

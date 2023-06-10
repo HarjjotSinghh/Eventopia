@@ -4,6 +4,12 @@ import { Link } from "react-router-dom";
 // import { HamburgerButton } from "./HamburgerButton";
 
 const Navbar = () => {
+    const clientToken = localStorage.getItem("token");
+    const clientName = localStorage.getItem("name");
+    const clientEmail = localStorage.getItem("email");
+    const clientUserName = localStorage.getItem("userName");
+
+
     return (
         <div>
             {/* <HamburgerButton /> */}
@@ -25,6 +31,12 @@ const Navbar = () => {
                 <Link to="/contact">
                     <NavbarHeading NavbarHeadingText="Contact Us"/>
                 </Link>
+                {!clientToken && <Link to="/login">
+                    <NavbarHeading NavbarHeadingText="Login"/>
+                </Link>
+                }
+                {clientToken && <NavbarHeading NavbarHeadingText={clientName}/>}
+                
             </div>
         </header>
         </div>
