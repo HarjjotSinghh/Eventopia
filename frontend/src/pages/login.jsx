@@ -2,10 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./login.css";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Login = () => {
 	const [data, setData] = useState({ email: "", password: "" });
 	const [error, setError] = useState("");
+	const { dispatch } = useAuthContext();
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
@@ -31,6 +33,7 @@ const Login = () => {
             localStorage.setItem("name", res.data["name"]);
 			// localStorage.setItem("token", res.data["token"]);
             // console.log(res.data, res.data["token"])
+			dispatch({type:"LOGIN", payload: res.data})
 			window.location = "/";
 		} catch (error) {
 			if (

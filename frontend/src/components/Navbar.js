@@ -1,14 +1,22 @@
+import { Button } from "./Button";
 import Logo from "./Logo";
 import NavbarHeading from "./NavbarHeading";
 import { Link } from "react-router-dom";
 // import { HamburgerButton } from "./HamburgerButton";
+import { useLogout } from "../hooks/useLogout";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Navbar = () => {
     const clientToken = localStorage.getItem("token");
+    console.log(clientToken)
     const clientName = localStorage.getItem("name");
     const clientEmail = localStorage.getItem("email");
     const clientUserName = localStorage.getItem("userName");
-
+    const {logout} = useLogout();
+    const handleLogout = () => {
+        logout();
+    }
+    const {user} = useAuthContext();
 
     return (
         <div>
@@ -31,11 +39,15 @@ const Navbar = () => {
                 <Link to="/contact">
                     <NavbarHeading NavbarHeadingText="Contact Us"/>
                 </Link>
-                {!clientToken && <Link to="/login">
-                    <NavbarHeading NavbarHeadingText="Login"/>
-                </Link>
-                }
-                {clientToken && <NavbarHeading NavbarHeadingText={clientName}/>}
+                {user ? (
+                    <button onClick={handleLogout}>
+                        <NavbarHeading NavbarHeadingText="Log Out" />
+                    </button>
+                    ) : (
+                    <Link to="/login">
+                        <NavbarHeading NavbarHeadingText="Login" />
+                    </Link>
+                )}
                 
             </div>
         </header>
