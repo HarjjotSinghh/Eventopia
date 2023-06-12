@@ -10,6 +10,8 @@ import {
     rem,
     Center,
   } from '@mantine/core';
+import { ContactIconsList } from './ContactUsInfo.tsx';
+import Navbar from './Navbar.js';
   
   const useStyles = createStyles((theme) => {
     const BREAKPOINT = theme.fn.smallerThan('sm');
@@ -106,46 +108,48 @@ import {
     const { classes } = useStyles();
   
     return (
-        <div className='flex items-center justify-center lg:h-screen lg:w-screen '>
-            <Paper shadow="md" radius="lg">
-                <div className={classes.wrapper}>
-                <div className={`${classes.contacts} flex items-center justify-center text-center`}>
-                    <Text fz="2xl" fw={700} className={classes.title} c="#fff">
-                        Contact Us
-                    </Text>
-                    
-                </div>
-        
-                <form className={classes.form} onSubmit={(event) => event.preventDefault()}>
-                    <Text fz="xl" fw={700} className={classes.title}>
-                    Get in touch
-                    </Text>
-        
-                    <div className={classes.fields}>
-                    <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-                        <TextInput label="Your name" placeholder="Your name" />
-                        <TextInput label="Your email" placeholder="hello@mantine.dev" required />
-                    </SimpleGrid>
-        
-                    <TextInput mt="md" label="Subject" placeholder="Subject" required />
-        
-                    <Textarea
-                        mt="md"
-                        label="Your message"
-                        placeholder="Please include all relevant information"
-                        minRows={3}
-                    />
-        
-                    <Group position="right" mt="md">
-                        <Button type="submit" className={classes.control}>
-                        Send message
-                        </Button>
-                    </Group>
+        <>
+            <Navbar/>
+            <div className='flex items-center justify-center lg:h-screen lg:w-screen py-24 mt-2'>
+                <Paper shadow="md" radius="lg">
+                    <div className={classes.wrapper}>
+                    <div className={`${classes.contacts} flex items-center justify-center  flex-col`}>
+                        <Text fz="2xl" fw={700} className={`${classes.title} text-center`} c="#fff">
+                            Contact Us
+                        </Text>
+                        <ContactIconsList variant="black"/>
                     </div>
-                </form>
-                </div>
-            </Paper>
-        </div>
+            
+                    <form className={classes.form} onSubmit={(event) => event.preventDefault()}>
+
+            
+                        <div className={classes.fields}>
+                        <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+                            <TextInput label="Your Name" placeholder="Your name" />
+                            <TextInput label="Your Email" placeholder="your@email.com" required />
+                        </SimpleGrid>
+            
+                        <TextInput mt="md" label="Subject" placeholder="Subject" required />
+            
+                        <Textarea
+                            mt="md"
+                            label="Your Message"
+                            placeholder="Please include all relevant information"
+                            minRows={5}
+                        />
+            
+                        <Group position="right" mt="lg">
+                            <Button type="submit" className={`${classes.control} rounded-[10px] bg-gradient-to-r from-[#25ffed] to-[#07feaa]`}>
+                            Send message
+                            </Button>
+                        </Group>
+                        </div>
+                    </form>
+                    </div>
+                </Paper>
+            </div>
+        </>
+        
       
     );
   }

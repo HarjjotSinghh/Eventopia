@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Navbar from '../components/Navbar';
+import { useDisclosure } from '@mantine/hooks';
+import { ColorSchemeProvider, LoadingOverlay} from '@mantine/core';
 
 const AddEvent = () => {
+	let [visible, { toggle }] = useDisclosure(false);
 	const sample = {
-		"_id": {
-		  "$oid": ""
-		},
 		"eventDetails": {
 		  "title": "",
 		  "date": "",
@@ -23,23 +23,15 @@ const AddEvent = () => {
 		"management": {
 		  "email": "",
 		  "contact": ""
-		},
-		"createdAt": {
-		  "$date": ""
-		},
-		"updatedAt": {
-		  "$date": ""
-		},
-		"uploadedBy": {
-			"userName": ""
-		},
-		"__v": 0
+		}
 	  }
   const [data, setData] = useState(sample);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const { user } = useAuthContext();
   const [admin, setAdmin] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -52,15 +44,26 @@ const AddEvent = () => {
         // console.log(user);
         const userData = user;
         const isAdmin = userData.admin;
+		const userEmail_ = userData.email;
+		setUserEmail(userEmail_);
         setAdmin(isAdmin);
-      });
+		// console.log(isAdmin);
+		
+	});
     };
 
     const getUserData = async () => {
       try {
 		const url = "http://localhost:5000/api/user/fetchUser";
         const userResponse = await axios.post(url, { email: user.email }, { headers: { 'Content-Type': 'application/json' } });
-        return userResponse.data.user;
+        console.log(userResponse.data.user);
+		setUserEmail(userResponse.data.user["email"]);
+		// console.log(userEmail);
+		// console.log(admin);
+		setUserEmail(userResponse.data.user.email);
+
+		return userResponse.data.user;
+	
       } catch (error) {
         console.log(error);
       }
@@ -73,15 +76,27 @@ const AddEvent = () => {
 
 	const handleChange = (event) => {
 		const { name, value, files } = event.target;
+		// if (name === '_id') {
+		// 	if (data._id && data._id.$oid) {
+		// 	  const updatedData = {
+		// 		...data,
+		// 		_id: { '$oid': data._id.$oid }
+		// 	  };
+		// 	  setData(updatedData);
+		// 	} else {
+		// 	  console.warn('Invalid _id value:', data._id);
+		// 	  // Handle the case when _id value is invalid or missing
+		// 	}
+		//   }
 		if (name === 'eventDetails.poster') {
-		const file = files[0];
-		const reader = new FileReader();
-		reader.onload = (e) => {
-			const updatedData = {
-			...data,
-			eventDetails: {
-				...data.eventDetails,
-				poster: e.target.result
+			const file = files[0];
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				const updatedData = {
+				...data,
+				eventDetails: {
+					...data.eventDetails,
+					poster: e.target.result
 			}
 			};
 			setData(updatedData);
@@ -99,16 +114,53 @@ const AddEvent = () => {
 			[nestedProperty]: value
 			}
 		};
-		setData(updatedData);
+		const updatedData_ = {
+			...updatedData, uploadedBy: {email: userEmail}
+		}
+		setData(updatedData_);
+		console.log(updatedData_);
 		}
 	};
 
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		e.currentTarget.disabled = true;
 		try {
+			const base64Data = data.eventDetails.poster.split(',')[1]; // Remove the data:image/jpeg;base64, part
+			const decodedData = atob(base64Data); // Decode the base64 data
+
+			// Convert the decoded data to a Uint8Array
+			const byteCharacters = Array.from(decodedData).map((char) => char.charCodeAt(0));
+			const byteArray = new Uint8Array(byteCharacters);
+
+			// Create a Blob from the Uint8Array
+			const file = new Blob([byteArray], { type: 'image/jpeg' });
+
+			// Create a FormData and append the file
+			const formData = new FormData();
+			formData.append('image', file);
+
+			// Make the POST request with the formData
+			const imageResponse = await axios.post('http://localhost:5000/api/image/', formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+				"Access-Control-Allow-Origin": "*"
+			},
+			});
+
+			const imageUrl = imageResponse.data.link;
+
+			const eventData = { ...data };
+			eventData.eventDetails.poster = imageUrl;
+			// console.log(imageUrl);
 			const url = "http://localhost:5000/api/events/";
-			const res = await axios.post(url, data);
+			// console.log(eventData);
+			const res = await axios.post(url, eventData, {headers: {'Content-Type': 'application/json',"Access-Control-Allow-Origin": "*"}});
+			setError("Event uploaded successfully 👍🏼");
+			// visible=false;
+			document.getElementById("loading-overlay").style.display = "none !important";
+			return res.status(500).json({message: "Event uploaded successfully 👍🏼", event: data})
 			// console.log(res);
 		} catch (error) {
 			if (
@@ -152,6 +204,8 @@ const AddEvent = () => {
     return (
 		<>
 			<Navbar/>
+			
+			<LoadingOverlay id='loading-overlay' className='fixed top-0 left-0 w-full h-full' visible={visible} overlayBlur={3} />
 				<div className="flex justify-center items-center w-screen h-screen py-[100px]">
 				<div className="flex justify-center items-center bg-slate-50 w-[100%] h-[100%] rounded-[40px]">
 				<div className="w-[100%] h-[100%]">
@@ -180,9 +234,9 @@ const AddEvent = () => {
 									<input
 										type="time"
 										placeholder="Time"
-										name="eventDetails.time"
+										name="eventDetails.timing"
 										onChange={handleChange}
-										value={data.eventDetails.time}
+										value={data.eventDetails.timing}
 										required
 										className="input p-2 rounded-md xl:w-[60%] 2xl:w-[50%] lg:w-[80%] md:w-[90%] w-[90%] text-[14px]"
 									/>
@@ -238,7 +292,7 @@ const AddEvent = () => {
 									<input
 										type="text"
 										placeholder="Organization Social Media"
-										name="organizer.socialMedia"
+										name="organizer.socialmedia"
 										onChange={handleChange}
 										value={data.organizer.socialmedia}
 										required
@@ -268,7 +322,6 @@ const AddEvent = () => {
 									/>
 									<input
 										type="text"
-										pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
 										placeholder="Management Contact Number"
 										name="management.contact"
 										onChange={handleChange}
@@ -304,7 +357,8 @@ const AddEvent = () => {
 										}}
 									/>
 									{error && <div className="error_msg">{error}</div>}
-									<button type="submit" className="green_btn px-12 py-2.5 text-xl bg-gradient-to-r from-green-300 to-cyan-300 rounded-[20px]">
+									
+									<button type="submit" onClick={toggle} id='green_btn' className="green_btn px-12 py-2.5 text-xl bg-gradient-to-r from-green-300 to-cyan-300 rounded-[20px]">
 										Submit
 									</button>
 								</form>

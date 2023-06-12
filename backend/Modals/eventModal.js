@@ -62,9 +62,9 @@ const EventSchema = new mongoose.Schema({
         }
     },
     uploadedBy: {
-        username:{
+        email:{
             type: String,
-            required:false,
+            required:true,
         }
     }
 },{ timestamps: true });

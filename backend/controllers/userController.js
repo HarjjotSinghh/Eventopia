@@ -78,7 +78,7 @@ const fetchUser = async (req, res) => {
         }
 
         const findEmail = await User.find({ email: req.body.email });
-        console.log(findEmail);
+        // console.log(findEmail);
 
         if (findEmail.length === 0) {
             return res.status(500).json({ message: 'Error finding user: User not found' });

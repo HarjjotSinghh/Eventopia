@@ -8,7 +8,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 const Navbar = () => {
     const clientToken = localStorage.getItem("token");
-    console.log(clientToken)
+    // console.log(clientToken)
     const clientName = localStorage.getItem("name");
     const clientEmail = localStorage.getItem("email");
     const clientUserName = localStorage.getItem("userName");

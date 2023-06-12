@@ -1,6 +1,11 @@
 import { createStyles, ThemeIcon, Text, SimpleGrid, Box, Stack } from '@mantine/core';
-import { IconSun, IconPhone, IconMapPin, IconAt } from '@tabler/icons-react';
-import React from 'react';
+// import { IconPhone, IconMapPin, IconAt } from '@tabler/icons-react';
+import AlternateEmailIcon from '../assets/svg/alternate_email.svg';
+import PhoneIcon from '../assets/svg/phone.svg';
+import LocationOnIcon from '../assets/svg/location.svg';
+
+
+import { Helmet } from 'react-helmet';
 
 type ContactIconVariant = 'white' | 'gradient';
 
@@ -36,14 +41,12 @@ const useStyles = createStyles((theme, { variant }: ContactIconStyles) => ({
 }));
 
 interface ContactIconProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
-  icon: React.FC<any>;
   title: React.ReactNode;
   description: React.ReactNode;
   variant?: ContactIconVariant;
 }
 
 function ContactIcon({
-  icon: Icon,
   title,
   description,
   variant = 'gradient',
@@ -53,18 +56,9 @@ function ContactIcon({
   const { classes, cx } = useStyles({ variant });
   return (
     <div className={cx(classes.wrapper, className)} {...others}>
-      {variant === 'gradient' ? (
-        <ThemeIcon size={40} radius="md" className={classes.icon}>
-          <Icon size="1.5rem" />
-        </ThemeIcon>
-      ) : (
-        <Box mr="md">
-          <Icon size="1.5rem" />
-        </Box>
-      )}
 
       <div>
-        <Text size="xs" className={classes.title}>
+        <Text size="14px" className={classes.title}>
           {title}
         </Text>
         <Text className={classes.description}>{description}</Text>
@@ -78,11 +72,23 @@ interface ContactIconsListProps {
   variant?: ContactIconVariant;
 }
 
+// const PhoneIcon = () => {
+//   <span className="material-icons"> phone </span>
+// }
+// const AlternateEmailIcon = () => {
+//   <span className="material-icons"> alternate_email </span>
+// } 
+// const LocationOnIcon = () => {
+//   <span className="material-icons"> location_on </span>
+// }
+
+
+
+
 const MOCKDATA = [
-  { title: 'Email', description: 'hello@mantine.dev', icon: IconAt },
-  { title: 'Phone', description: '+49 (800) 335 35 35', icon: IconPhone },
-  { title: 'Address', description: '844 Morris Park avenue', icon: IconMapPin },
-  { title: 'Working hours', description: '8 a.m. – 11 p.m.', icon: IconSun },
+  { title: 'Email', description: 'contact@eventopia.org', icon: AlternateEmailIcon },
+  { title: 'Phone', description: '+91 99582 10259', icon: PhoneIcon },
+  { title: 'Address', description: 'New Delhi, India', icon: LocationOnIcon },
 ];
 
 export function ContactIconsList({ data = MOCKDATA, variant }: ContactIconsListProps) {
@@ -92,28 +98,37 @@ export function ContactIconsList({ data = MOCKDATA, variant }: ContactIconsListP
 
 export function ContactIcons() {
   return (
-    <SimpleGrid cols={2} breakpoints={[{ maxWidth: 755, cols: 1 }]}>
-      <Box
-        sx={(theme) => ({
-          padding: theme.spacing.xl,
-          borderRadius: theme.radius.md,
-          backgroundColor: theme.white,
-        })}
-      >
-        <ContactIconsList />
-      </Box>
+    <>
 
-      <Box
-        sx={(theme) => ({
-          padding: theme.spacing.xl,
-          borderRadius: theme.radius.md,
-          backgroundImage: `linear-gradient(135deg, ${theme.colors[theme.primaryColor][6]} 0%, ${
-            theme.colors[theme.primaryColor][4]
-          } 100%)`,
-        })}
-      >
-        <ContactIconsList variant="white" />
-      </Box>
-    </SimpleGrid>
+      <Helmet>
+          <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+          />
+      </Helmet>
+      <SimpleGrid cols={2} breakpoints={[{ maxWidth: 755, cols: 1 }]}>
+        <Box
+          sx={(theme) => ({
+            padding: theme.spacing.xl,
+            borderRadius: theme.radius.md,
+            backgroundColor: theme.white,
+          })}
+        >
+          <ContactIconsList />
+        </Box>
+
+        <Box
+          sx={(theme) => ({
+            padding: theme.spacing.xl,
+            borderRadius: theme.radius.md,
+            backgroundImage: `linear-gradient(135deg, ${theme.colors[theme.primaryColor][6]} 0%, ${
+              theme.colors[theme.primaryColor][4]
+            } 100%)`,
+          })}
+        >
+          <ContactIconsList variant="white" />
+        </Box>
+      </SimpleGrid>
+    </>
   );
 }

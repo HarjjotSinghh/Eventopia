@@ -1,6 +1,8 @@
 const eventModal = require("../Modals/eventModal");
 const userModal = require("../Modals/eventModal")
 const mongoose = require("mongoose");
+const LocalStorage = require('node-localstorage').LocalStorage,
+localStorage = new LocalStorage('./scratch');
 
 const getEvents = async (req, res) => {
     const events = await eventModal.find({}).sort({createdAt: -1});
@@ -32,10 +34,11 @@ const createEvent = async (req, res) => {
         if (admin === "false") {
             res.status(500).json({ message: 'Error creating event', error: "You must be an admin to perform this." });
         }
-        const event = new eventModal({...req.body, uploadedBy: {userName: userName}});
+        const event = new eventModal(req.body);
         await event.save();
         res.status(201).json({ message: 'Event created successfully', event: event });
     } catch(error) {
+        console.error(error);
         res.status(500).json({ message: 'Error creating event', error: error.message });
     };
 };

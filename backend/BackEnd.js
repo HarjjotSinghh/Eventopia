@@ -3,12 +3,19 @@ const express = require('express');
 require('dotenv').config();
 const eventRouter = require('./routes/event');
 const userRouter = require('./routes/user');
+const imageRouter = require('./routes/image');
+
 const mongoose = require('mongoose');
 const cors = require("cors");
 // const eventModal = require('./Modals/example');
 const app = express();
 const port = 5000;
 const Event = require('./Modals/eventModal');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const fs = require('fs');
+const axios = require('axios');
+
 // const next = require('concurrent/lib/next');
 
 //dummy data of event
@@ -22,7 +29,14 @@ const Event = require('./Modals/eventModal');
 
 
 
-app.use(express.json());
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cors());
 
 app.use((req, res, next) => {
@@ -32,7 +46,7 @@ app.use((req, res, next) => {
 
 app.use("/api/events",eventRouter);
 app.use("/api/user",userRouter);
-
+app.use("/api/image",imageRouter);
 
 // router.get('/events', async (req, res) => {
 //   try {
