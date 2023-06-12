@@ -58,7 +58,7 @@ const signUpUser = async (req, res) => {
             if(result){
                 const token = jwt.sign({ id: findEmail._id }, `${process.env.PRIVITE_KEY}`, {expiresIn: "7d"});
                 // const token2 = User.generateAuthToken();
-                res.status(201).json({ message: 'User login successfull', token:token, email:findEmail[0].email, userName:findEmail[0].userName, name:findEmail[0].name});
+                res.status(201).json({ message: 'User login successfull', token:token, email:findEmail[0].email, userName:findEmail[0].userName, name:findEmail[0].name, admin:findEmail[0].admin});
             }
             else{
                 res.status(404).json({ message: 'Incorrect Email or Password'});
@@ -71,6 +71,26 @@ const signUpUser = async (req, res) => {
     };
 };
 
+const fetchUser = async (req, res) => {
+    try {
+        if (!req.body.email) {
+            return res.status(500).json({ message: 'Email not provided in the request body' });
+        }
+
+        const findEmail = await User.find({ email: req.body.email });
+        console.log(findEmail);
+
+        if (findEmail.length === 0) {
+            return res.status(500).json({ message: 'Error finding user: User not found' });
+        }
+
+        return res.status(201).json({ message: 'User found successfully', user: findEmail[0] });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Error finding user', error: error.message });
+    };
+};
+
 const validate = (data) => {
     const schema = Joi.object({
         email: Joi.string().email().required().label("Email"),
@@ -78,4 +98,4 @@ const validate = (data) => {
     });
 };
 
-module.exports = {createUser,signUpUser};
+module.exports = {createUser,signUpUser,fetchUser};

@@ -33,7 +33,7 @@ const Navbar = () => {
                 <Link to="/events">
                     <NavbarHeading NavbarHeadingText="Events"/>
                 </Link>
-                <Link to="/apply">
+                <Link to="/add">
                     <NavbarHeading NavbarHeadingText="Add An Event"/>
                 </Link>
                 <Link to="/contact">
@@ -52,8 +52,6 @@ const Navbar = () => {
             </div>
         </header>
         </div>
-        
-
     )
 };
 export default Navbar;

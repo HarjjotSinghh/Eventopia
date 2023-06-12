@@ -22,6 +22,7 @@ export const AuthContextProvider = ({ children }) => {
       const email = localStorage.getItem("email");
       const userName = localStorage.getItem("userName");
       const name = localStorage.getItem("name");
+      const admin = localStorage.getItem("admin");
   
       if (token && email && userName && name) {
         dispatch({
@@ -30,7 +31,8 @@ export const AuthContextProvider = ({ children }) => {
             token,
             email,
             userName,
-            name
+            name,
+            admin
           }
         });
       }
@@ -41,6 +43,7 @@ export const AuthContextProvider = ({ children }) => {
       localStorage.setItem("email", state.user?.email || "");
       localStorage.setItem("userName", state.user?.userName || "");
       localStorage.setItem("name", state.user?.name || "");
+      localStorage.setItem("admin", state.user?.admin || "false");
     }, [state.user]);
   
     // console.log("AuthContext state: ", state);

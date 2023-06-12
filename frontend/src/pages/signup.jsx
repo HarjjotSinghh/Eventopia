@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "./signup.css";
+import "./signup.css";
 
 const Signup = () => {
 	const [data, setData] = useState({
@@ -42,16 +42,16 @@ const Signup = () => {
 	return (
 		<div className="signup_container">
 			<div className="signup_form_container">
-				<div className="right">
+				<div className="right-signup">
 					<h1 style={{padding: "20px" }}>Existing User ?</h1>
 					<Link to="/login">
-						<button type="button" className="white_btn">
+						<button type="button" className="white_btn-signup">
 							Sing in
 						</button>
 					</Link>
 				</div>
-				<div className="left">
-					<form className="form_container" onSubmit={handleSubmit}>
+				<div className="left-signup">
+					<form className="form_container-signup" onSubmit={handleSubmit}>
 						
 						<input
 							type="text"
@@ -61,7 +61,7 @@ const Signup = () => {
 							// value={data.name}
 							defaultValue={data.name}
 							required
-							className="input"
+							className="input-signup"
 						/>
 						<input
 							type="text"
@@ -71,7 +71,7 @@ const Signup = () => {
                             defaultValue={data.userName}
 							value={data.userName}
 							required
-							className="input"
+							className="input-signup"
 						/>
 						<input
 							type="email"
@@ -81,7 +81,7 @@ const Signup = () => {
 							// value={data.email}
 							defaultValue={data.email}
 							required
-							className="input"
+							className="input-signup"
 						/>
 						<input
 							type="password"
@@ -91,10 +91,10 @@ const Signup = () => {
 							// value={data.password}
 							defaultValue={data.password}
 							required
-							className="input"
+							className="input-signup"
 						/>
-						{error && <div className="error_msg">{error}</div>}
-						<button type="submit" className="green_btn">
+						{error && <div className="error_msg-signup">{error}</div>}
+						<button type="submit" className="green_btn-signup">
 							Sing Up
 						</button>
 					</form>

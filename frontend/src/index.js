@@ -5,6 +5,8 @@ import App from './App';
 import Events from './pages/events';
 import Signup from './pages/signup';
 import Login from './pages/login';
+import AddEvent from './pages/addEvent';
+import { ContactUs } from './components/ContactUs';
 import { AuthContextProvider } from './contexts/AuthContext';
 
 import {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
   { 
     path: "/events",
     element: <Events />,
+  },
+  { 
+    path: "/add",
+    element: <AddEvent />,
+  },
+  { 
+    path: "/contact",
+    element: <ContactUs />,
   },
   { 
     path: "/login",

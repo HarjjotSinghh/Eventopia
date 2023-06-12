@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import styles from "./login.css";
+import "./login.css";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const Login = () => {
@@ -25,12 +25,14 @@ const Login = () => {
 				localStorage.removeItem("email");
             	localStorage.removeItem("userName");
             	localStorage.removeItem("name");
+            	localStorage.removeItem("admin");
             }
 
             localStorage.setItem("token", newToken);
             localStorage.setItem("email", res.data["email"]);
             localStorage.setItem("userName", res.data["userName"]);
             localStorage.setItem("name", res.data["name"]);
+            localStorage.setItem("admin", res.data["admin"]);
 			// localStorage.setItem("token", res.data["token"]);
             // console.log(res.data, res.data["token"])
 			dispatch({type:"LOGIN", payload: res.data})
@@ -49,8 +51,8 @@ const Login = () => {
 	return (
 		<div className="login_container">
 			<div className="login_form_container">
-				<div className="left">
-					<form className="form_container" onSubmit={handleSubmit}>
+				<div className="left-login">
+					<form className="form_container-login" onSubmit={handleSubmit}>
 						<input
 							type="email"
 							placeholder="Email"
@@ -58,7 +60,7 @@ const Login = () => {
 							onChange={handleChange}
 							value={data.email}
 							required
-							className="input"
+							className="input-login"
 						/>
 						<input
 							type="password"
@@ -67,18 +69,18 @@ const Login = () => {
 							onChange={handleChange}
 							value={data.password}
 							required
-							className="input"
+							className="input-login"
 						/>
-						{error && <div className="error_msg">{error}</div>}
-						<button type="submit" className="green_btn">
+						{error && <div className="error_msg-login">{error}</div>}
+						<button type="submit" className="green_btn-login">
 							Log In
 						</button>
 					</form>
 				</div>
-				<div className="right">
+				<div className="right-login">
 					<h1>New Here ?</h1>
 					<Link to="/signup">
-						<button type="button" className="white_btn">
+						<button type="button" className="white_btn-login">
 							Sing Up
 						</button>
 					</Link>
