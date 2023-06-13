@@ -26,7 +26,7 @@ const Navbar = () => {
             <Link to="/">
                 <Logo/>
             </Link>
-            <div className="navbar-links hidden flex-row xl:flex ">
+            <div className="navbar-links hidden flex-row xl:flex pr-4">
                 <Link to="/home">
                     <NavbarHeading NavbarHeadingText="Home"/>
                 </Link>

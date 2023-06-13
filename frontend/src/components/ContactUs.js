@@ -74,7 +74,7 @@ import Navbar from './Navbar.js';
         boxSizing: 'border-box',
         position: 'relative',
         borderRadius: theme.radius.lg,
-        background: 'linear-gradient(25deg, #25ffed, #07feaa)',
+        background: 'linear-gradient(25deg, #ff6739 ,#ff9a7b)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         border: `${rem(1)} solid transparent`,
@@ -139,7 +139,7 @@ import Navbar from './Navbar.js';
                         />
             
                         <Group position="right" mt="lg">
-                            <Button type="submit" className={`${classes.control} rounded-[10px] bg-gradient-to-r from-[#25ffed] to-[#07feaa]`}>
+                            <Button type="submit" className={`${classes.control} rounded-[10px] bg-gradient-to-r from-[#ff6739] to-[#ff9a7b]`}>
                             Send message
                             </Button>
                         </Group>

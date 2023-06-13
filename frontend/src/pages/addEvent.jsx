@@ -316,6 +316,7 @@ const AddEvent = () => {
 										onChange={handleChange}
 										required
 										className=""
+										accept="image/png, image/jpeg"
 										/>
 										{/* <span className="file-name opacity-0">No file chosen</span> */}
 									</div>
@@ -414,7 +415,7 @@ const AddEvent = () => {
 									/>
 									{error && <div className="error_msg">{error}</div>}
 									
-									<button type="submit" onClick={toggle} id='green_btn' className="green_btn px-12 py-2.5 text-xl rounded-[20px] bg-gradient-to-r from-[#25ffed] to-[#07feaa]">
+									<button type="submit" onClick={toggle} id='green_btn' className="text-white green_btn px-12 py-2.5 text-xl rounded-[20px] bg-gradient-to-r from-[#ff6739] to-[#ff9a7b]" disabled={!isFormValid}>
 										Submit
 									</button>
 								</form>

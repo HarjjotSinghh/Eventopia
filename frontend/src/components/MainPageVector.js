@@ -1,4 +1,4 @@
-import mainPageVector from "../assets/svg/main-page-vector.svg"
+import mainPageVector from "../assets/svg/landing-page-vector.svg"
 
 export const MainPageVector = () => {
     return (

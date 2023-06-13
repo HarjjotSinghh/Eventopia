@@ -1,4 +1,4 @@
-import logoSvg from "../assets/svg/Eventopia Logo Black Text.svg"
+import logoSvg from "../assets/svg/Eventopia Logo Black Text2.svg"
 
 const Logo = () => {
     return (

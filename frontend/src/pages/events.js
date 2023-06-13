@@ -4,8 +4,10 @@ import Navbar from '../components/Navbar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import EventDetailsPage from './EventDetailsPage';
 
+
 function Events() {
   const [events, setEvents] = useState(null);
+  const [extractedColors, setExtractedColors] = useState([]);
   
   useEffect(() => {
     const fetchEvents = async () => {
@@ -49,57 +51,71 @@ function Events() {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
+    
+    window.scrollTo(0,0);
   }
 
   const handleForwardPagination = () => {
     const totalPages = Math.ceil(events.length / ITEMS_PER_PAGE);
+    
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
+    window.scrollTo(0,0);
   }
 
   return (
     <>
       <Navbar/>
       <div className='flex justify-start items-center px-2 xl:px-10 flex-col'>
-        <h1 className='lg:text-6xl text-3xl pt-[150px] text-transparent font-bold bg-clip-text bg-gradient-to-l from-[#00ff9e] to-[#2cf6e6] select-none'>
+        <h1 className='lg:text-8xl text-4xl pt-[180px] pb-[100px] text-transparent font-bold bg-clip-text xl:bg-gradient-to-l bg-gradient-to-br from-[#ff9a7b] to-[#ff6739] select-none'>
           Upcoming Events
         </h1>
-        <div className='main flex flex-wrap justify-center items-center gap-10 w-[100%] select-none px-1 xl:px-10 pb-[100px] pt-16 xl:flex-row flex-col overflow-x-hidden'>
+        <div className='main flex flex-wrap justify-center items-center w-[100%] select-none px-1 xl:px-10 pb-[100px] pt-16 overflow-x-hidden gap-10'>
         {events && events.slice(indexOfFirstItem, indexOfLastItem).map((event) => {
             
             return (
-                <div key={event._id} className='bg-[#eeeeee] rounded-[30px] xl:w-[750px] lg:w-[575px] w-[350px] sm:w-[350px] h-auto'>
-                    <Link to={`/events/${encodeURI(event.eventDetails.title)}`}>
-                    <img src={event.eventDetails.poster} draggable="false" alt='hello' className='w-[100%] lg:h-[400px] md:h-[300px] h-[200px] p-[0px] rounded-t-[30px] object-cover bg-black'/>
-                    <div className='p-8 break-words'>
-                    <h1 className='lg:text-4xl text-3xl pt-3 pb-3'>{event.eventDetails.title}</h1>
-                        <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Date:</span> {formatDate(event.eventDetails.date)}</p>
-                        <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Timing:</span> {formatTime(event.eventDetails.timing)}</p>
-                        <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Venue:</span> {event.eventDetails.venue}</p>
-                        
-                        <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Description:</span> {
-                        event.eventDetails.description.length > 50
-                          ? event.eventDetails.description.slice(0, 50) + "..."
-                          : event.eventDetails.description
-                        }</p>
-                        <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Fees:</span>  {event.eventDetails.fees === 0 ? "Free" : "INR " + event.eventDetails.fees}</p>
-                        {/* <p>Completed: {event.eventDetails.completed ? 'Yes' : 'No'}</p> */}
-                        
-                        <h2 className='lg:text-[30px] text-xl pt-3 pb-3'>Organizer</h2>
-                        <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Society:</span> {event.organizer.society}</p>
-                        <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Social Media:</span> {event.organizer.socialmedia}</p>
-                        <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Website:</span> {event.organizer.website}</p>
-                        
-                        <h2 className='lg:text-[30px] text-xl pt-3 pb-3'>Management</h2>
-                        <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Email:</span> {event.management.email}</p>
-                        <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Contact:</span> {event.management.contact}</p>
-                        
-                        {/* <h3>Uploaded By</h3>
-                        <p>Username: {event.uploadedBy.username}</p> */}
+                <div key={event._id} className='bg-gradient-to-l hover:border-[#ff936f] border-[#ffe4de] border-4 border-solid from-[#fff8f5] to-[#ffe8e0] rounded-[40px] max-w-[800px] max-h-[600px] overflow-hidden hover:scale-[1.015] transition-all duration-[0.4s]'>
                     
-                    </div>
-                    </Link>
+                    
+                    
+                      <div className='group flex relative lg:flex-row flex-col'>
+                      
+                          <img src={event.eventDetails.poster} draggable="false" alt='hello' className='lg:w-[400px] p-[0px] rounded-l-[30px] object-cover bg-black'/>
+                          <div className='lg:p-6 p-2 break-words flex justify-normal items-left flex-col gap-1'>
+                                <Link to={`/events/${encodeURI(event.eventDetails.title)}`}>
+                                  <h1 className='lg:text-3xl text-2xl pt-3 pb-3 font-bold hover:underline group-hover:text-[#ff6739]'>{event.eventDetails.title}</h1>
+                                </Link>
+                                <p className='lg:text-[18px] text-[14px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Date:</span> {formatDate(event.eventDetails.date)}</p>
+                                <p className='lg:text-[18px] text-[14px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Timing:</span> {formatTime(event.eventDetails.timing)}</p>
+                                <p className='lg:text-[18px] text-[14px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Fees:</span>  {event.eventDetails.fees === 0 ? "Free" : "INR " + event.eventDetails.fees}</p>
+                                <p className='lg:text-[18px] text-[14px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Venue:</span> {event.eventDetails.venue}</p>
+                                {/* <p className='lg:text-[18px] text-[14px] text-justify'><span className='lg:text-[20px] text=[14px] font-semibold pr-1 '>Description:</span> {
+                                event.eventDetails.description.length > 50
+                                  ? event.eventDetails.description.slice(0, 50) + "..."
+                                  : event.eventDetails.description
+                                }</p> */}
+                                
+                                {/* <p>Completed: {event.eventDetails.completed ? 'Yes' : 'No'}</p> */}
+                                
+                                  
+                                
+                                
+                                {/* <h3>Uploaded By</h3>
+                                <p>Username: {event.uploadedBy.username}</p> */}
+                                <Link to={`/events/${encodeURI(event.eventDetails.title)}`} className='pt-4'>
+                                    <div className='flex items-center justify-center'>
+                                      <button className='lg:py-4 lg:px-10 py-2 px-5 lg:text-xl text-lg bg-gradient-to-l from-[#ff9a7b] to-[#ff6739]  bottom-0 right-0 rounded-[30px] text-white'>
+                                        Show More
+                                      </button>
+                                    </div>
+                                    
+                                </Link>
+                            </div>
+                      </div>
+                      
+                    
+                    
 
                 </div>
             )
@@ -109,15 +125,15 @@ function Events() {
       {events && events.length > 0 && (
         <ul className="pagination-list flex items-center justify-center">
           <li className="pagination-item xl:px-4 px-2 pb-[200px] lg:text-2xl text-lg">
-            <button className='bg-green-200 select-none rounded-[15px] border-green-600 lg:px-8 lg:py-4 px-6 py-2' onClick={handleBackwardPagination} disabled={currentPage === 1}>Back</button>
+            <button className='bg-[#ff7d55] text-white select-none rounded-[15px] border-green-600 lg:px-8 lg:py-4 px-6 py-2' onClick={handleBackwardPagination} disabled={currentPage === 1}>Back</button>
           </li>
           {Array.from(Array(Math.ceil(events.length / ITEMS_PER_PAGE)), (item, index) => (
             <li key={index} className={`pagination-item xl:px-4 px-2 pb-[200px] lg:text-2xl text-lg ${currentPage === index + 1 ? 'active' : ''}`}>
-              <div className='bg-green-100 select-none rounded-[15px] border-green-600 lg:px-8 lg:py-4 px-6 py-2'>{index + currentPage }</div>
+              <div className='bg-[#ffac92] text-white select-none rounded-[15px] border-green-600 lg:px-8 lg:py-4 px-6 py-2'>{index + currentPage }</div>
             </li>
           ))}
           <li className="pagination-item xl:px-4 px-2 pb-[200px] lg:text-2xl text-lg">
-            <button className='bg-green-200 select-none rounded-[15px] border-green-600 lg:px-8 lg:py-4 px-6 py-2' onClick={handleForwardPagination} disabled={currentPage === Math.ceil(events.length / ITEMS_PER_PAGE)}>Next</button>
+            <button className='bg-[#ff7d55] text-white select-none rounded-[15px] border-green-600 lg:px-8 lg:py-4 px-6 py-2' onClick={handleForwardPagination} disabled={currentPage === Math.ceil(events.length / ITEMS_PER_PAGE)}>Next</button>
           </li>
         </ul>
       )}
