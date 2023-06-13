@@ -7,6 +7,26 @@ import { ColorSchemeProvider, LoadingOverlay} from '@mantine/core';
 
 const AddEvent = () => {
 	let [visible, { toggle }] = useDisclosure(false);
+	function validateUrl(url) {
+		// Check if the URL is empty
+		if (url === '') {
+		  return false;
+		}
+	  
+		// Check if the URL starts with http or https
+		if (!/^https?:\/\//.test(url)) {
+		  return false;
+		}
+	  
+		// Check if the URL contains at least one period
+		if (!/\./.test(url)) {
+		  return false;
+		}
+	  
+		// Check if the URL is valid using a regular expression
+		const regex = /^https?:\/\/[a-zA-Z0-9_\-\.]+\.[a-zA-Z]{2,}$/;
+		return regex.test(url);
+	  }
 	const sample = {
 		"eventDetails": {
 		  "title": "",
@@ -25,6 +45,17 @@ const AddEvent = () => {
 		  "contact": ""
 		}
 	  }
+	
+	  //logic for min date.
+	const getMinDate = () => {
+		const dtToday = new Date();
+		const month = (dtToday.getMonth()+1>9)?dtToday.getMonth()+1:`0${dtToday.getMonth()+1}`;
+		const day = (dtToday.getDate()>9)?dtToday.getDate():`0${dtToday.getDate()}`;
+		const year = dtToday.getFullYear();
+		
+		return year + '-' + month + '-' + day;  
+	}
+
   const [data, setData] = useState(sample);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -226,6 +257,7 @@ const AddEvent = () => {
 										type="Date"
 										placeholder="Date"
 										name="eventDetails.date"
+										min={getMinDate()}
 										onChange={handleChange}
 										value={data.eventDetails.date}
 										required
@@ -290,22 +322,28 @@ const AddEvent = () => {
 										className="input p-2 rounded-md xl:w-[60%] 2xl:w-[50%] lg:w-[80%] md:w-[90%] w-[90%] text-[14px]"
 									/>
 									<input
-										type="text"
+										type="url"
 										placeholder="Organization Social Media"
 										name="organizer.socialmedia"
 										onChange={handleChange}
 										value={data.organizer.socialmedia}
 										required
-										className="input p-2 rounded-md xl:w-[60%] 2xl:w-[50%] lg:w-[80%] md:w-[90%] w-[90%] text-[14px]"
+										className="input p-2 rounded-md xl:w-[60%] 2xl:w-[50%] lg:w-[80%] md:w-[90%] w-[90%] text-[14px] invalid:text-pink-600
+										focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
 									/>
+									{/* {validateUrl(data.organizer.socialmedia) && <p className="mt-2 hidden peer-invalid:block text-pink-600 text-sm">
+									Not woking.
+									</p>
+									} */}
 									<input
-										type="text"
+										type="url"
 										placeholder="Organization Website"
 										name="organizer.website"
 										onChange={handleChange}
 										value={data.organizer.website}
 										required
-										className="input p-2 rounded-md xl:w-[60%] 2xl:w-[50%] lg:w-[80%] md:w-[90%] w-[90%] text-[14px]"
+										className="input p-2 rounded-md xl:w-[60%] 2xl:w-[50%] lg:w-[80%] md:w-[90%] w-[90%] text-[14px] invalid:text-pink-600
+										focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
 									/>
 
 									<h1 className="lg:text-4xl text-3xl select-none">

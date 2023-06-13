@@ -4,7 +4,8 @@
   "description": "Discover an exceptional website dedicated to keeping you informed about the vibrant college and university scene in New Delhi. Our meticulously curated platform offers an extensive array of information, showcasing a wide range of events happening at esteemed educational institutions in the heart of the city. Whether you're a student, faculty member, or simply an enthusiastic attendee, stay up-to-date with the latest happenings, browse through upcoming events, and reminisce about past gatherings. With our comprehensive listings, you'll never miss out on the exciting academic, cultural, and social experiences that New Delhi's colleges and universities have to offer.",
   "main": "index.js",
   "dependencies": {
-    "concurrent": "^0.3.2"
+    "concurrent": "^0.3.2",
+    "concurrently": "^8.2.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
