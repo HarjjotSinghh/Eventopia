@@ -6,12 +6,17 @@ import Events from './pages/events';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import AddEvent from './pages/addEvent';
+import Apply from './pages/apply';
 import { ContactUs } from './components/ContactUs';
+import EventDetailsPage from './pages/EventDetailsPage';
+
 import { AuthContextProvider } from './contexts/AuthContext';
+
 
 import {
   createBrowserRouter,
   RouterProvider,
+  useParams
 } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -32,12 +37,20 @@ const router = createBrowserRouter([
     element: <Events />,
   },
   { 
+    path: "/events/:title",
+    element: <EventDetailsPage/>,
+  },
+  { 
     path: "/add",
     element: <AddEvent />,
   },
   { 
     path: "/contact",
     element: <ContactUs />,
+  },
+  { 
+    path: "/apply",
+    element: <Apply />,
   },
   { 
     path: "/login",

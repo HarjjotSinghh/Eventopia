@@ -22,7 +22,7 @@ const Navbar = () => {
         <div>
             {/* <HamburgerButton /> */}
 
-            <header className="navbar flex items-center justify-between fixed z-[99] top-0 w-screen py-4 bg-transparent backdrop-blur-lg backdrop-brightness-[0.99]">
+            <header className="navbar flex items-center justify-between fixed z-[99] top-0 w-screen py-4 bg-[rgba(255,255,255,0.8)] backdrop-blur-lg">
             <Link to="/">
                 <Logo/>
             </Link>

@@ -62,6 +62,18 @@ const AddEvent = () => {
   const { user } = useAuthContext();
   const [admin, setAdmin] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [completed, setCompleted] = useState(false);
+
+  const checkFormValidity = () => {
+	// Check if all form fields have a value
+	const formFields = Object.values(data).flat();
+	const isFormValid = formFields.every(value => value !== '');
+  
+	// Update the state to enable/disable the button
+	setIsFormValid(isFormValid);
+  };
 
 
   useEffect(() => {
@@ -107,6 +119,7 @@ const AddEvent = () => {
 
 	const handleChange = (event) => {
 		const { name, value, files } = event.target;
+		checkFormValidity();
 		// if (name === '_id') {
 		// 	if (data._id && data._id.$oid) {
 		// 	  const updatedData = {
@@ -157,6 +170,8 @@ const AddEvent = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		e.currentTarget.disabled = true;
+		setIsLoading(true);
+		setCompleted(false);
 		try {
 			const base64Data = data.eventDetails.poster.split(',')[1]; // Remove the data:image/jpeg;base64, part
 			const decodedData = atob(base64Data); // Decode the base64 data
@@ -191,6 +206,8 @@ const AddEvent = () => {
 			setError("Event uploaded successfully 👍🏼");
 			// visible=false;
 			document.getElementById("loading-overlay").style.display = "none !important";
+			setIsLoading(false);
+			setCompleted(true);
 			return res.status(500).json({message: "Event uploaded successfully 👍🏼", event: data})
 			// console.log(res);
 		} catch (error) {
@@ -235,12 +252,13 @@ const AddEvent = () => {
     return (
 		<>
 			<Navbar/>
-			
-			<LoadingOverlay id='loading-overlay' className='fixed top-0 left-0 w-full h-full' visible={visible} overlayBlur={3} />
-				<div className="flex justify-center items-center w-screen h-screen py-[100px]">
+			{!completed &&
+		 	<>
+				{isLoading && <LoadingOverlay id='loading-overlay' className='fixed top-0 left-0 w-full h-full' visible={visible} overlayBlur={3} />}
+				<div className="flex justify-center items-center w-screen h-screen pt-[100px] pb-[200px]">
 				<div className="flex justify-center items-center bg-slate-50 w-[100%] h-[100%] rounded-[40px]">
 				<div className="w-[100%] h-[100%]">
-				<form className=" flex justify-center items-center gap-5 flex-col p-12" onSubmit={handleSubmit}>
+				<form className=" flex justify-center items-center gap-5 flex-col p-12 pt-[100px] pb-[100px]" onSubmit={handleSubmit}>
 									<h1 className="lg:text-4xl text-3xl select-none">
 										Event Details
 									</h1>
@@ -396,13 +414,24 @@ const AddEvent = () => {
 									/>
 									{error && <div className="error_msg">{error}</div>}
 									
-									<button type="submit" onClick={toggle} id='green_btn' className="green_btn px-12 py-2.5 text-xl bg-gradient-to-r from-green-300 to-cyan-300 rounded-[20px]">
+									<button type="submit" onClick={toggle} id='green_btn' className="green_btn px-12 py-2.5 text-xl rounded-[20px] bg-gradient-to-r from-[#25ffed] to-[#07feaa]">
 										Submit
 									</button>
 								</form>
 				</div>
 				</div>
 			</div>
+			</>
+			}
+			{completed && 
+			<>
+				<div className="flex justify-center items-center w-screen h-screen select-none">
+					<h1 className="text-4xl text-center leading-[55px] bg-green-100 border-green-400 border p-6 px-24 rounded-[10px]">
+						Event uploaded successfully.<br></br><a href='/events' className='hover:underline'>Click here to see it.</a>
+					</h1>
+				</div>
+			</>
+			}
 		</>
       
     );

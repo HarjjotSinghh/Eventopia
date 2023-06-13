@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./signup.css";
+import Navbar from "../components/Navbar";
 
 const Signup = () => {
 	const [data, setData] = useState({
@@ -40,6 +41,8 @@ const Signup = () => {
 	};
 
 	return (
+		<>
+		<Navbar/>
 		<div className="signup_container">
 			<div className="signup_form_container">
 				<div className="right-signup">
@@ -101,6 +104,8 @@ const Signup = () => {
 				</div>
 			</div>
 		</div>
+		</>
+		
 	);
 };
 

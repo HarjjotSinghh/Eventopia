@@ -41,12 +41,14 @@ const useStyles = createStyles((theme, { variant }: ContactIconStyles) => ({
 }));
 
 interface ContactIconProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
+  icon: any;
   title: React.ReactNode;
   description: React.ReactNode;
   variant?: ContactIconVariant;
 }
 
 function ContactIcon({
+  icon,
   title,
   description,
   variant = 'gradient',
@@ -56,7 +58,7 @@ function ContactIcon({
   const { classes, cx } = useStyles({ variant });
   return (
     <div className={cx(classes.wrapper, className)} {...others}>
-
+        <img draggable='false' src={icon} className='pr-3'></img>
       <div>
         <Text size="14px" className={classes.title}>
           {title}

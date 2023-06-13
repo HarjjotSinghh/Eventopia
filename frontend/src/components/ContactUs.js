@@ -111,7 +111,7 @@ import Navbar from './Navbar.js';
         <>
             <Navbar/>
             <div className='flex items-center justify-center lg:h-screen lg:w-screen py-24 mt-2'>
-                <Paper shadow="md" radius="lg">
+                <Paper className='scale-[1.1]' shadow="md" radius="lg">
                     <div className={classes.wrapper}>
                     <div className={`${classes.contacts} flex items-center justify-center  flex-col`}>
                         <Text fz="2xl" fw={700} className={`${classes.title} text-center`} c="#fff">

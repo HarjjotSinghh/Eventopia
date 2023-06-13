@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./login.css";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Navbar from "../components/Navbar";
 
 const Login = () => {
 	const [data, setData] = useState({ email: "", password: "" });
@@ -49,6 +50,8 @@ const Login = () => {
 	};
 
 	return (
+		<>
+		<Navbar/>
 		<div className="login_container">
 			<div className="login_form_container">
 				<div className="left-login">
@@ -87,6 +90,8 @@ const Login = () => {
 				</div>
 			</div>
 		</div>
+		</>
+		
 	);
 };
 
