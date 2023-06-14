@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 // import { HamburgerButton } from "./HamburgerButton";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Dropdown } from 'flowbite-react';
 import { useState } from "react";
 
 const Navbar = () => {
