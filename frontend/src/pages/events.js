@@ -4,13 +4,42 @@ import Navbar from '../components/Navbar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import EventDetailsPage from './EventDetailsPage';
 import Footer from '../components/Footer';
+import { animate, inView, stagger } from 'motion';
 
 
 function Events() {
   const [events, setEvents] = useState(null);
-  const [extractedColors, setExtractedColors] = useState([]);
+  // const [extractedColors, setExtractedColors] = useState([]);
+  // const getElement = (str) => {
+  //   return document.querySelectorAll(str);
+  // };
+  // const easing = [.22, .03, .26, 1];
   
   useEffect(() => {
+    // animate(
+    //   getElement("#upcoming-events"),
+    //   {y: [-1200,0], opacity:[0,1]},
+    //   {
+    //     duration:1,
+    //     easing: easing
+    //   }
+    // );
+    // animate(
+    //   getElement(".all-events"),
+    //   {opacity:[0,1]},
+    //   {
+    //     duration:1,
+    //     easing: easing,
+    //     delay: 1
+    //   }
+    // );
+    // inView(getElement(".event"), ({target}) => {
+    //   animate(
+    //     target.querySelector("event-content"),
+    //     { opacity: 1, transform: "none" },
+    //     { delay: 0.2, duration: 0.9, easing: [0.17, 0.55, 0.55, 1] }
+    //   )
+    // })
     const fetchEvents = async () => {
       const response = await fetch('http://localhost:5000/api/events', {method:"GET"});
       const json = await response.json();
@@ -69,18 +98,18 @@ function Events() {
     <>
       <Navbar/>
       <div className='flex justify-start items-center px-2 xl:px-10 flex-col'>
-        <h1 className='lg:text-8xl text-4xl pt-[180px] pb-[100px] text-transparent font-bold bg-clip-text xl:bg-gradient-to-l bg-gradient-to-br from-[#ff9a7b] to-[#ff6739] select-none'>
+        <h1 id='upcoming-events' className=' upcoming-events lg:text-8xl text-4xl pt-[180px] pb-[100px] text-transparent font-bold bg-clip-text xl:bg-gradient-to-l bg-gradient-to-br from-[#ff9a7b] to-[#ff6739] select-none'>
           Upcoming Events
         </h1>
-        <div className='main flex flex-wrap justify-center items-center w-[100%] select-none px-1 xl:px-10 pb-[100px] pt-16 overflow-x-hidden gap-10'>
+        <div className='all-events main flex flex-wrap justify-center items-center w-[100%] select-none px-1 xl:px-10 pb-[100px] pt-16 overflow-x-hidden gap-10'>
         {events && events.slice(indexOfFirstItem, indexOfLastItem).map((event) => {
             
             return (
-                <div key={event._id} className='bg-gradient-to-l hover:border-[#ff936f] border-[#ffe4de] border-4 border-solid from-[#fff8f5] to-[#ffe8e0] rounded-[40px] max-w-[800px] max-h-[600px] overflow-hidden hover:scale-[1.015] transition-all duration-[0.4s]'>
+                <div key={event._id} className='event bg-gradient-to-l hover:border-[#ff936f] border-[#ffe4de] border-4 border-solid from-[#fff8f5] to-[#ffe8e0] rounded-[40px] max-w-[800px] max-h-[600px] overflow-hidden hover:scale-[1.015] transition-all duration-[0.4s]'>
                     
                     
                     
-                      <div className='group flex relative lg:flex-row flex-col'>
+                      <div className='event-content group flex relative lg:flex-row flex-col'>
                       
                           <img src={event.eventDetails.poster} draggable="false" alt='hello' className='lg:w-[400px] p-[0px] rounded-l-[30px] object-cover bg-black'/>
                           <div className='lg:p-6 p-2 break-words flex justify-normal items-left flex-col gap-1'>
