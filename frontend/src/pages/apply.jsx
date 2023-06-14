@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 export default function Apply() {
   return (
@@ -11,6 +12,7 @@ export default function Apply() {
         </a>
         <iframe title='admin-application' src="https://docs.google.com/forms/d/e/1FAIpQLSeb-J2NPNDseImqhAWr-vhgdIgbBZCY--9wNqXbR4zSV4Tb0w/viewform?embedded=true" className="text-black text-2xl xl:w-[850px] xl:h-[600px] w-[90%] h-[600px]" frameborder="0" marginheight="0"  marginwidth="0">Loading…</iframe>
     </div>
+    <Footer/>
     </>
   )
 }

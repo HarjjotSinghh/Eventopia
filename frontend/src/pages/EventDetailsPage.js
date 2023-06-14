@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 const EventDetailsPage = () => {
   const [events, setEvents] = useState(null);
@@ -130,7 +131,17 @@ const EventDetailsPage = () => {
                               <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Fees:</span>  {event.eventDetails.fees === 0 ? "Free" : "INR " + event.eventDetails.fees}</p>
                               <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Venue:</span> {event.eventDetails.venue}</p>
                               <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Description:</span> {
-                              event.eventDetails.description
+
+                                <>
+                                  {event.eventDetails.description.split("\n").map((line, index) => (
+                                    
+                                    <React.Fragment key={index}>
+                                      {index === 0 && <br/>}
+                                      {line}
+                                      <br />
+                                    </React.Fragment>
+                                  ))}
+                                </>
                               }</p>
                               
                               {/* <p>Completed: {event.eventDetails.completed ? 'Yes' : 'No'}</p> */}
@@ -138,7 +149,7 @@ const EventDetailsPage = () => {
                                 <div className='flex flex-col gap-1 justify-start pt-3'>
                                   <h2 className='lg:text-[30px] text-xl pt-3 pb-3 font-bold'>Organizer</h2>
                                   <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Society:</span>
-                                        {event.organizer.society.length}
+                                        {event.organizer.society}
                                   </p>
                                   <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Social Media:</span> <a href={event.organizer.socialmedia} className='hover:underline' target='_blank' rel='noreferrer'>Social Media Link </a> </p>
                                   <p className='lg:text-[18px] text-[12px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Website:</span><a href={event.organizer.website} className='hover:underline' target='_blank' rel='noreferrer'>Website Link </a> </p>
@@ -168,7 +179,7 @@ const EventDetailsPage = () => {
               Similar Events
           </h1>
           <div className='grid 2xl:grid-cols-2 grid-cols-1 gap-6'>
-          {events && events.slice(0, 4).map((event) => {
+          {events && events.slice(events.indexOf(event) + 1, events.indexOf(event) + 5).map((event) => {
             
             return (
                 <div key={event._id} className='bg-gradient-to-l hover:border-[#ff936f] border-[#ffe4de] border-4 border-solid from-[#fff8f5] to-[#ffe8e0] rounded-[40px] max-w-[800px] max-h-[600px] overflow-hidden hover:scale-[1.015] transition-all duration-[0.4s]'>
@@ -226,13 +237,7 @@ const EventDetailsPage = () => {
               </div>
         </Link>
         </div>
-        
-        
-      
-        
-        
-      
-      
+      <Footer/>
     </>
     
   );

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import EventDetailsPage from './EventDetailsPage';
+import Footer from '../components/Footer';
 
 
 function Events() {
@@ -127,7 +128,7 @@ function Events() {
           <li className="pagination-item xl:px-4 px-2 pb-[200px] lg:text-2xl text-lg">
             <button className='bg-[#ff7d55] text-white select-none rounded-[15px] border-green-600 lg:px-8 lg:py-4 px-6 py-2' onClick={handleBackwardPagination} disabled={currentPage === 1}>Back</button>
           </li>
-          {Array.from(Array(Math.ceil(events.length / ITEMS_PER_PAGE)), (item, index) => (
+          {Array.from(Array(Math.ceil(events.length / ITEMS_PER_PAGE)).slice(-2), (item, index) => (
             <li key={index} className={`pagination-item xl:px-4 px-2 pb-[200px] lg:text-2xl text-lg ${currentPage === index + 1 ? 'active' : ''}`}>
               <div className='bg-[#ffac92] text-white select-none rounded-[15px] border-green-600 lg:px-8 lg:py-4 px-6 py-2'>{index + currentPage }</div>
             </li>
@@ -140,7 +141,7 @@ function Events() {
       </div>
       </div>
       
-      
+      <Footer/>
     </>
     
   );

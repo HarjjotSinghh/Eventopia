@@ -8,7 +8,7 @@ export const Button = ({ButtonText}) => {
 
         }
         if (user) {
-            window.location = "/";
+            window.location = "/events";
         }
     }
     return (

@@ -51,7 +51,7 @@ const signUpUser = async (req, res) => {
             res.status(404).json({ message: error.details[0].message});
         }
         if(findEmail.length == 0){
-            res.status(404).json({ message: 'User not exists'});
+            res.status(404).json({ message: 'User does not exist.'});
         }
         else{
             const result = await bcrypt.compare(req.body.password, findEmail[0].password);
@@ -61,13 +61,13 @@ const signUpUser = async (req, res) => {
                 res.status(201).json({ message: 'User login successfull', token:token, email:findEmail[0].email, userName:findEmail[0].userName, name:findEmail[0].name, admin:findEmail[0].admin});
             }
             else{
-                res.status(404).json({ message: 'Incorrect Email or Password'});
+                res.status(404).json({ message: 'Incorrect Email or Password.'});
             }
         }
     }
     catch(error) {
         console.log(error);
-        res.status(500).json({ message: 'Error finding user', error: error.message });
+        res.status(500).json({ message: 'Error Finding User', error: error.message });
     };
 };
 
@@ -87,7 +87,7 @@ const fetchUser = async (req, res) => {
         return res.status(201).json({ message: 'User found successfully', user: findEmail[0] });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: 'Error finding user', error: error.message });
+        return res.status(500).json({ message: 'Error Finding User', error: error.message });
     };
 };
 

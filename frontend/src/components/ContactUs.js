@@ -12,6 +12,7 @@ import {
   } from '@mantine/core';
 import { ContactIconsList } from './ContactUsInfo.tsx';
 import Navbar from './Navbar.js';
+import Footer from './Footer.jsx';
   
   const useStyles = createStyles((theme) => {
     const BREAKPOINT = theme.fn.smallerThan('sm');
@@ -148,6 +149,7 @@ import Navbar from './Navbar.js';
                     </div>
                 </Paper>
             </div>
+          <Footer/>
         </>
         
       

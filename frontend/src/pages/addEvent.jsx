@@ -4,6 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import Navbar from '../components/Navbar';
 import { useDisclosure } from '@mantine/hooks';
 import { ColorSchemeProvider, LoadingOverlay} from '@mantine/core';
+import Footer from '../components/Footer';
 
 const AddEvent = () => {
 	let [visible, { toggle }] = useDisclosure(false);
@@ -255,15 +256,15 @@ const AddEvent = () => {
 			{!completed &&
 		 	<>
 				{isLoading && <LoadingOverlay id='loading-overlay' className='fixed top-0 left-0 w-full h-full' visible={visible} overlayBlur={3} />}
-				<div className="flex justify-center items-center w-screen h-screen pt-[100px] pb-[200px]">
+				<div className="flex justify-center items-center pt-[100px]">
 				<div className="flex justify-center items-center bg-slate-50 w-[100%] h-[100%] rounded-[40px]">
 				<div className="w-[100%] h-[100%]">
-				<form className=" flex justify-center items-center gap-5 flex-col p-12 pt-[100px] pb-[100px]" onSubmit={handleSubmit}>
+				<form className=" flex justify-center items-center gap-5 flex-col p-12 pt-[100px] pb-[200px]" onSubmit={handleSubmit}>
 									<h1 className="lg:text-4xl text-3xl select-none">
 										Event Details
 									</h1>
 									<input
-										type="Title"
+										type="title"
 										placeholder="Title"
 										name="eventDetails.title"
 										onChange={handleChange}
@@ -299,7 +300,7 @@ const AddEvent = () => {
 										required
 										className="input p-2 rounded-md xl:w-[60%] 2xl:w-[50%] lg:w-[80%] md:w-[90%] w-[90%] text-[14px]"
 									/>
-									<input
+									<textarea
 										type="text"
 										placeholder="Description"
 										name="eventDetails.description"
@@ -433,6 +434,7 @@ const AddEvent = () => {
 				</div>
 			</>
 			}
+		<Footer/>
 		</>
       
     );
