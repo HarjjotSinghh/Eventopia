@@ -39,7 +39,7 @@ const Navbar = () => {
     return (
         <>
             <nav className="bg-[rgba(255,255,255,0.8)] backdrop-blur-lg z-[999] fixed text-[18px]">
-                <div className="w-screen flex flex-wrap items-center justify-between p-4 lg:px-12 px-2">
+                <div className="w-screen flex flex-wrap items-center justify-between p-4 lg:px-12 px-2 first:mr-auto last:ml-auto">
                     <Link to="/" className="flex items-center">
                         <Logo></Logo>
                     </Link>
@@ -69,8 +69,7 @@ const Navbar = () => {
 
                                 </Link>
                             )}
-                            
-                            {isOpen && (
+                            {(isOpen && user) && (
                                 <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1  ring-1 ring-black ring-opacity-5 bg-[rgba(255,255,255,0.8)] backdrop-blur-lg" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
                                     <Link to="/profile">
                                         <span className="block px-4 py-2 text-sm text-gray-800 " role="menuitem">Your Profile</span>
@@ -85,7 +84,7 @@ const Navbar = () => {
 
                                     </Link>
 
-                                        <span className="block px-4 py-2 text-sm text-gray-800 " role="menuitem" onClick={handleLogout}>Sign out</span>
+                                        <span className="block px-4 py-2 text-sm text-gray-800 hover:cursor-pointer" role="menuitem" onClick={handleLogout}>Sign out</span>
                                 </div>
                             )}
                         </div>

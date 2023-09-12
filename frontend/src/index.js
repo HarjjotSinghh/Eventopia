@@ -16,7 +16,7 @@ import {
   useParams
 } from "react-router-dom";
 
-export const backendURI = "http://localhost:6969";
+export const backendURI = "https://eventopiab.onrender.com";
 
 const router = createBrowserRouter([
   {
