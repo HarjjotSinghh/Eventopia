@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./signup.css";
 import Navbar from "../components/Navbar";
+import { backendURI } from '../index';
+
 
 const Signup = () => {
 	const [data, setData] = useState({
@@ -25,7 +27,7 @@ const Signup = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = "http://localhost:5000/api/user/signup";
+			const url = `${backendURI}/api/user/signup`;
 			const { data: res } = await axios.post(url, data);
 			navigate("/login");
 			console.log(res.message);

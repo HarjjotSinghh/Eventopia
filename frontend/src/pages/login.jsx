@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import "./login.css";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Navbar from "../components/Navbar";
+import { backendURI } from '../index';
+
 
 const Login = () => {
 	const [data, setData] = useState({ email: "", password: "" });
@@ -17,7 +19,7 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = "http://localhost:5000/api/user/login";
+			const url = `${backendURI}/api/user/login`;
 			const res = await axios.post(url, data);
             const newToken = res.data["token"];
             const existingToken = localStorage.getItem("token");

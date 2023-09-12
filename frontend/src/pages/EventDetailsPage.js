@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import { backendURI } from '../index';
+
 
 const EventDetailsPage = () => {
   const [events, setEvents] = useState(null);
@@ -12,7 +14,7 @@ const EventDetailsPage = () => {
   title = decodeURI(title);
   useEffect(() => {
     const fetchEvents = async () => {
-      const response = await fetch('http://localhost:5000/api/events', {method:"GET"});
+      const response = await fetch(`${backendURI}/api/events`, {method:"GET"});
       const json = await response.json();
       if (response.ok) {
         setEvents(json);

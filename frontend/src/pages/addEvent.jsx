@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import { useDisclosure } from '@mantine/hooks';
 import { ColorSchemeProvider, LoadingOverlay} from '@mantine/core';
 import Footer from '../components/Footer';
+import { backendURI } from '../index';
 // import { FilePond, registerPlugin } from 'react-filepond';
 // import 'filepond/dist/filepond.min.css';
 // import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
@@ -105,7 +106,7 @@ const AddEvent = () => {
 
     const getUserData = async () => {
       try {
-		const url = "http://localhost:5000/api/user/fetchUser";
+		const url = `${backendURI}/api/user/fetchUser`;
         const userResponse = await axios.post(url, { email: user.email }, { headers: { 'Content-Type': 'application/json' } });
         console.log(userResponse.data.user);
 		setUserEmail(userResponse.data.user["email"]);
@@ -196,7 +197,7 @@ const AddEvent = () => {
 			formData.append('image', file);
 
 			// Make the POST request with the formData
-			const imageResponse = await axios.post('http://localhost:5000/api/image/', formData, {
+			const imageResponse = await axios.post(`${backendURI}/api/image/`, formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data',
 				"Access-Control-Allow-Origin": "*"
@@ -208,7 +209,7 @@ const AddEvent = () => {
 			const eventData = { ...data };
 			eventData.eventDetails.poster = imageUrl;
 			// console.log(imageUrl);
-			const url = "http://localhost:5000/api/events/";
+			const url = `${backendURI}/api/events/`;
 			// console.log(eventData);
 			const res = await axios.post(url, eventData, {headers: {'Content-Type': 'application/json',"Access-Control-Allow-Origin": "*"}});
 			setError("Event uploaded successfully 👍🏼");

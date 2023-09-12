@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import EventDetailsPage from './EventDetailsPage';
 import Footer from '../components/Footer';
 import { animate, inView, stagger } from 'motion';
+import { backendURI } from '../index';
 
 
 function Events() {
@@ -41,7 +42,7 @@ function Events() {
     //   )
     // })
     const fetchEvents = async () => {
-      const response = await fetch('http://localhost:5000/api/events', {method:"GET"});
+      const response = await fetch(`${backendURI}/api/events`, {method:"GET"});
       const json = await response.json();
       if (response.ok) {
         setEvents(json)

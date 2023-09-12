@@ -9,15 +9,14 @@ import AddEvent from './pages/addEvent';
 import Apply from './pages/apply';
 import { ContactUs } from './components/ContactUs';
 import EventDetailsPage from './pages/EventDetailsPage';
-
 import { AuthContextProvider } from './contexts/AuthContext';
-
-
 import {
   createBrowserRouter,
   RouterProvider,
   useParams
 } from "react-router-dom";
+
+export const backendURI = "http://localhost:6969";
 
 const router = createBrowserRouter([
   {
