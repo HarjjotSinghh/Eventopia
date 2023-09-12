@@ -72,14 +72,20 @@ const Navbar = () => {
                             
                             {isOpen && (
                                 <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1  ring-1 ring-black ring-opacity-5 bg-[rgba(255,255,255,0.8)] backdrop-blur-lg" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
-                                    
-                                    <a href="/" className="block px-4 py-2 text-sm text-gray-800 " role="menuitem">Your Profile</a>
-                                    {user.admin === true && (
-                                            <a href="/dashboard" className="block px-4 py-2 text-sm text-gray-800 " role="menuitem">Dashboard</a>
+                                    <Link to="/profile">
+                                        <span className="block px-4 py-2 text-sm text-gray-800 " role="menuitem">Your Profile</span>
+                                    </Link>
+                                    {user.admin && (
+                                            <Link to="/dashboard">
+                                                <span className="block px-4 py-2 text-sm text-gray-800 " role="menuitem">Dashboard</span>
+                                            </Link>
                                     )}
+                                    <Link to="/settings">
+                                        <span className="block px-4 py-2 text-sm text-gray-800 " role="menuitem">Settings</span>
 
-                                    <a href="/" className="block px-4 py-2 text-sm text-gray-800 " role="menuitem">Settings</a>
-                                    <a href="/" className="block px-4 py-2 text-sm text-gray-800 " role="menuitem" onClick={handleLogout}>Sign out</a>
+                                    </Link>
+
+                                        <span className="block px-4 py-2 text-sm text-gray-800 " role="menuitem" onClick={handleLogout}>Sign out</span>
                                 </div>
                             )}
                         </div>

@@ -105,21 +105,17 @@ function Events() {
         {events && events.slice(indexOfFirstItem, indexOfLastItem).map((event) => {
             
             return (
-                <div key={event._id} className='event bg-gradient-to-l hover:border-[#ff936f] border-[#ffe4de] border-4 border-solid from-[#fff8f5] to-[#ffe8e0] rounded-[40px] max-w-[800px] max-h-[600px] overflow-hidden hover:scale-[1.015] transition-all duration-[0.4s]'>
-                    
-                    
-                    
+                <div key={event._id} className='event bg-gradient-to-l hover:border-[#ff936f] border-[#ffe4de] border-4 border-solid from-[#fff8f5] to-[#ffe8e0] rounded-[40px] max-w-[800px] max-h-[600px] overflow-hidden transition-all duration-[0.4s]'>
                       <div className='event-content group flex relative lg:flex-row flex-col'>
-                      
-                          <img src={event.eventDetails.poster} draggable="false" alt='hello' className='lg:w-[400px] p-[0px] rounded-l-[30px] object-cover bg-black'/>
+                          <img src={event.eventDetails.poster} draggable="false" alt='hello' className='aspect-square max-w-[300px] p-[0px] rounded-l-[30px] object-cover bg-black'/>
                           <div className='lg:p-6 p-2 break-words flex justify-normal items-left flex-col gap-1'>
                                 <Link to={`/events/${encodeURI(event.eventDetails.title)}`}>
-                                  <h1 className='lg:text-3xl text-2xl pt-3 pb-3 font-bold hover:underline group-hover:text-[#ff6739]'>{event.eventDetails.title}</h1>
+                                  <h1 className='lg:text-xl text-lg pt-3 pb-3 font-bold hover:underline group-hover:text-[#ff6739]'>{event.eventDetails.title}</h1>
                                 </Link>
-                                <p className='lg:text-[18px] text-[14px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Date:</span> {formatDate(event.eventDetails.date)}</p>
-                                <p className='lg:text-[18px] text-[14px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Timing:</span> {formatTime(event.eventDetails.timing)}</p>
-                                <p className='lg:text-[18px] text-[14px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Fees:</span>  {event.eventDetails.fees === 0 ? "Free" : "INR " + event.eventDetails.fees}</p>
-                                <p className='lg:text-[18px] text-[14px]'><span className='lg:text-[20px] text=[14px] font-semibold pr-1'>Venue:</span> {event.eventDetails.venue}</p>
+                                <p className='lg:text-[14px] text-[12px]'><span className='lg:text-[16px] text=[14px] font-semibold pr-1'>Date:</span> {formatDate(event.eventDetails.date)}</p>
+                                <p className='lg:text-[14px] text-[12px]'><span className='lg:text-[16px] text=[14px] font-semibold pr-1'>Timing:</span> {formatTime(event.eventDetails.timing)}</p>
+                                <p className='lg:text-[14px] text-[12px]'><span className='lg:text-[16px] text=[14px] font-semibold pr-1'>Fees:</span>  {event.eventDetails.fees === 0 ? "Free" : "INR " + event.eventDetails.fees}</p>
+                                <p className='lg:text-[14px] text-[12px]'><span className='lg:text-[16px] text=[14px] font-semibold pr-1'>Venue:</span> {event.eventDetails.venue.length > 20 ? `${event.eventDetails.venue.slice(0,20)}...` : event.eventDetails.venue}</p>
                                 {/* <p className='lg:text-[18px] text-[14px] text-justify'><span className='lg:text-[20px] text=[14px] font-semibold pr-1 '>Description:</span> {
                                 event.eventDetails.description.length > 50
                                   ? event.eventDetails.description.slice(0, 50) + "..."
@@ -135,7 +131,7 @@ function Events() {
                                 <p>Username: {event.uploadedBy.username}</p> */}
                                 <Link to={`/events/${encodeURI(event.eventDetails.title)}`} className='pt-4'>
                                     <div className='flex items-center justify-center'>
-                                      <button className='lg:py-4 lg:px-10 py-2 px-5 lg:text-xl text-lg bg-gradient-to-l from-[#ff9a7b] to-[#ff6739]  bottom-0 right-0 rounded-[30px] text-white'>
+                                      <button className='lg:py-2 lg:px-6 py-1 px-3 lg:text-lg text-md bg-gradient-to-l from-[#ff9a7b] to-[#ff6739]  bottom-0 right-0 rounded-[30px] text-white'>
                                         Show More
                                       </button>
                                     </div>

@@ -5,6 +5,13 @@ import Navbar from '../components/Navbar';
 import { useDisclosure } from '@mantine/hooks';
 import { ColorSchemeProvider, LoadingOverlay} from '@mantine/core';
 import Footer from '../components/Footer';
+// import { FilePond, registerPlugin } from 'react-filepond';
+// import 'filepond/dist/filepond.min.css';
+// import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
+// import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+// import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
+
+// registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
 const AddEvent = () => {
 	let [visible, { toggle }] = useDisclosure(false);
