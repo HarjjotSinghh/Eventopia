@@ -33,7 +33,7 @@ const AddEvent = () => {
 		}
 	  
 		// Check if the URL is valid using a regular expression
-		const regex = /^https?:\/\/[a-zA-Z0-9_\-\.]+\.[a-zA-Z]{2,}$/;
+		const regex = /^https?:\/\/[a-zA-Z0-9_\-\.]+\.[a-zA-Z]{2,}$/; // eslint-disable-line
 		return regex.test(url);
 	  }
 	const sample = {

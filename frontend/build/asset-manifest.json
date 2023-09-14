@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ee8f6f02.css",
+    "main.js": "/static/js/main.0137ee23.js",
+    "static/media/landing-page-vector.svg": "/static/media/landing-page-vector.780cc29a8b13ff94e8fa11be7b264401.svg",
+    "static/media/main-icon.svg": "/static/media/main-icon.bc674114dd6ecb1a4af5fd66ca07bbae.svg",
+    "static/media/Eventopia Logo Black Text2.svg": "/static/media/Eventopia Logo Black Text2.50e8efbdefc1fa76040f711781fd21ad.svg",
+    "static/media/alternate_email.svg": "/static/media/alternate_email.794045e382ffe0432889d05582dfe3bc.svg",
+    "index.html": "/index.html",
+    "static/media/phone.svg": "/static/media/phone.3bbbf6358c47f519a2bd6a56b00f6cce.svg",
+    "static/media/location.svg": "/static/media/location.12f7ddbac1443a080d2eca9bdca968d0.svg",
+    "main.ee8f6f02.css.map": "/static/css/main.ee8f6f02.css.map",
+    "main.0137ee23.js.map": "/static/js/main.0137ee23.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ee8f6f02.css",
+    "static/js/main.0137ee23.js"
+  ]
+}

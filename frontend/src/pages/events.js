@@ -46,7 +46,7 @@ function Events() {
       const json = await response.json();
       if (response.ok) {
         setEvents(json)
-      };
+      }
     };
     fetchEvents();
   }, [])
