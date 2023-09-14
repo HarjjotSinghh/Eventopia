@@ -6,6 +6,9 @@
     ],
     "plugins": ["@typescript-eslint"],
     "rules": {
+        "no-mixed-spaces-and-tabs": 0,
+        "eqeqeq": "off",
+        "no-console": "off"
     }
   }
   
