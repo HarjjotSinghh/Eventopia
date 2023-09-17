@@ -1,15 +1,15 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "BackEnd.js",
-        "use": "@now/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "BackEnd.js"
-      }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "./BackEnd.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "./BackEnd.js"
+    }
+  ]
+}
