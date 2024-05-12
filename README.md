@@ -2,8 +2,9 @@
 
 Discover an exceptional website dedicated to keeping you informed about the vibrant college and university scene in New Delhi. Our meticulously curated platform offers an extensive array of information, showcasing a wide range of events happening at esteemed educational institutions in the heart of the city. Whether you're a student, faculty member, or simply an enthusiastic attendee, stay up-to-date with the latest happenings, browse through upcoming events, and reminisce about past gatherings. With our comprehensive listings, you'll never miss out on the exciting academic, cultural, and social experiences that New Delhi's colleges and universities have to offer.
 
-## Screenshot
+## Screenshots
 ![image](https://github.com/HarjjotSinghh/Eventopia/assets/114088280/ee6b4f84-c618-4401-b47f-bcbf593ecc45)
+![image](https://github.com/HarjjotSinghh/Eventopia/assets/114088280/70014f74-42db-484e-88c4-8a161c315636)
 
 
 ## Tech Stack Used
